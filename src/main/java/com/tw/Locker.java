@@ -1,16 +1,11 @@
 package com.tw;
 
-import sun.net.www.protocol.http.HttpURLConnection;
-
-import java.sql.SQLOutput;
 import java.util.regex.Pattern;
 
 public class Locker {
-    private int initialCapacity;
     private int surplusCapacity;
 
-    public Locker(int initialCapacity, int surplusCapacity) {
-        this.initialCapacity = initialCapacity;
+    public Locker(int surplusCapacity) {
         this.surplusCapacity = surplusCapacity;
     }
 
