@@ -3,6 +3,7 @@ package com.tw;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LockerTest {
@@ -18,6 +19,6 @@ class LockerTest {
         int surplusCapacity = 0;
 
         Locker locker = new Locker(initialCapacity, surplusCapacity);
-        assertTrue(locker.saveBag());
+        assertFalse(locker.saveBag());
     }
 }

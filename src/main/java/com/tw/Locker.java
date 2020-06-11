@@ -12,7 +12,11 @@ public class Locker {
     }
 
     public boolean saveBag() {
-        System.out.println("出票");
+        if(surplusCapacity <= 0) {
+            System.out.println("出票失败");
+            return false;
+        }
+        surplusCapacity++;
         return true;
     }
 }
