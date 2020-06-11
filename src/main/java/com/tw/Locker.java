@@ -17,6 +17,7 @@ public class Locker {
             return false;
         }
         surplusCapacity++;
+        System.out.println("出票成功");
         return true;
     }
 }

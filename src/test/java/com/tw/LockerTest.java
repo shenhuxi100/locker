@@ -21,4 +21,13 @@ class LockerTest {
         Locker locker = new Locker(initialCapacity, surplusCapacity);
         assertFalse(locker.saveBag());
     }
+
+    @Test
+    void should_pop_ticket_when_save_bag_given_locker_is_not_full() {
+        int initialCapacity = 20;
+        int surplusCapacity = 19;
+
+        Locker locker = new Locker(initialCapacity, surplusCapacity);
+        assertTrue(locker.saveBag());
+    }
 }
