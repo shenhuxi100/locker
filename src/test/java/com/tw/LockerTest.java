@@ -40,4 +40,14 @@ class LockerTest {
         Locker locker = new Locker(initialCapacity, surplusCapacity);
         assertFalse(locker.takeBag(ticket));
     }
+
+    @Test
+    void should_take_bag_success_when_save_bag_given_valid_ticket() {
+        int initialCapacity = 20;
+        int surplusCapacity = 19;
+        String ticket = "123456";
+
+        Locker locker = new Locker(initialCapacity, surplusCapacity);
+        assertTrue(locker.takeBag(ticket));
+    }
 }
