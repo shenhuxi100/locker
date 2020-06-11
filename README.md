@@ -1,5 +1,5 @@
 ## 储物柜(Locker)可以存包、取包
-### Tasking:
+### Tasking: (Assuming valid ticket is ^\d+)
 Given locker 已满，when 存包， then 未出票，存包失败.
 
 Given locker 未满，when 存包， then 出票，存包成功.
