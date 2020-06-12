@@ -1,6 +1,6 @@
 package com.tw;
 
-public class Ticket {
+class Ticket {
     private Integer ticketNumber;
 
     public Ticket(Integer ticketNumber) {

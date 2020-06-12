@@ -3,7 +3,7 @@ package com.tw;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Locker {
+class Locker {
     private int surplusCapacity;
     private List<Ticket> ticketLocker = new ArrayList<>();
 
