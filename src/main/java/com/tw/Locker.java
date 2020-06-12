@@ -18,7 +18,7 @@ public class Locker {
             return null;
         }
 
-        surplusCapacity++;
+        surplusCapacity--;
         String ticketNumber = LocalDateTime.now().toString();
         ticketLocker.put(ticketNumber, "1");
         System.out.println("出票成功");
@@ -30,6 +30,7 @@ public class Locker {
         if (locker != null){
             ticketLocker.remove(ticket);
             System.out.println("取包成功");
+            surplusCapacity++;
             return true;
         }
 
@@ -37,4 +38,8 @@ public class Locker {
         return false;
     }
 
+
+    public int getSurplusCapacity() {
+        return surplusCapacity;
+    }
 }
