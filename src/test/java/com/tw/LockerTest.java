@@ -3,7 +3,9 @@ package com.tw;
 
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LockerTest {
@@ -12,7 +14,7 @@ class LockerTest {
         int surplusCapacity = 0;
         Locker locker = new Locker(surplusCapacity);
 
-        assertFalse(locker.saveBag());
+        assertNull(locker.saveBag());
     }
 
     @Test
@@ -20,11 +22,11 @@ class LockerTest {
         int surplusCapacity = 19;
         Locker locker = new Locker(surplusCapacity);
 
-        assertTrue(locker.saveBag());
+        assertNotNull(locker.saveBag());
     }
 
     @Test
-    void should_take_bag_failed_when_save_bag_given_invalid_ticket() {
+    void should_take_bag_failed_when_take_bag_given_invalid_ticket() {
         int surplusCapacity = 2;
         String ticket = "Invalid ticket";
         Locker locker = new Locker(surplusCapacity);
@@ -33,11 +35,19 @@ class LockerTest {
     }
 
     @Test
-    void should_take_bag_success_when_save_bag_given_valid_ticket() {
+    void should_take_bag_success_when_take_bag_given_valid_ticket() {
         int surplusCapacity = 10;
-        String ticket = "123456";
         Locker locker = new Locker(surplusCapacity);
-
+        String ticket = locker.saveBag();
         assertTrue(locker.takeBag(ticket));
+    }
+
+    @Test
+    void should_take_bag_failed_when_take_bag_given_duplicated_ticket() {
+        int surplusCapacity = 10;
+        Locker locker = new Locker(surplusCapacity);
+        String ticket = locker.saveBag();
+        assertTrue(locker.takeBag(ticket));
+        assertFalse(locker.takeBag(ticket));
     }
 }
