@@ -15,7 +15,7 @@ class LockerTest {
         int surplusCapacity = 0;
         Locker locker = new Locker(surplusCapacity);
 
-        Integer result = locker.saveBag();
+        Ticket result = locker.saveBag();
 
         assertNull(result);
         assertThat(locker.getSurplusCapacity(), is(0));
@@ -25,11 +25,11 @@ class LockerTest {
     void should_save_bag_successfully_and_pop_ticket_when_save_bag_given_locker_is_not_full() {
         int surplusCapacity = 19;
         Locker locker = new Locker(surplusCapacity);
-        Integer ticketNumber = surplusCapacity;
+        Ticket expectTicket = new Ticket(surplusCapacity);
 
-        Integer result = locker.saveBag();
+        Ticket result = locker.saveBag();
 
-        assertThat(result, is(ticketNumber));
+        assertThat(result.getTicketNumber(), is(expectTicket.getTicketNumber()));
         assertThat(locker.getSurplusCapacity(), is(18));
 
     }
@@ -37,7 +37,7 @@ class LockerTest {
     @Test
     void should_prompt_failure_when_take_bag_given_ticket_is_invalid() {
         int surplusCapacity = 2;
-        Integer ticket = 3;
+        Ticket ticket = new Ticket(3);
         Locker locker = new Locker(surplusCapacity);
 
         boolean result = locker.takeBag(ticket);
@@ -51,7 +51,7 @@ class LockerTest {
     void should_prompt_failure_when_take_bag_given_ticket_is_duplicated() {
         int surplusCapacity = 10;
         Locker locker = new Locker(surplusCapacity);
-        Integer ticket = locker.saveBag();
+        Ticket ticket = locker.saveBag();
 
         boolean result = locker.takeBag(ticket);
 
@@ -63,7 +63,7 @@ class LockerTest {
     void should_take_bag_successfully_when_take_bag_given_ticket_is_valid() {
         int surplusCapacity = 10;
         Locker locker = new Locker(surplusCapacity);
-        Integer ticket = locker.saveBag();
+        Ticket ticket = locker.saveBag();
 
         boolean result = locker.takeBag(ticket);
 
