@@ -6,8 +6,8 @@ import com.tw.locker.exception.NoCapacityException;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LockerTest {
     @Test
@@ -27,7 +27,7 @@ class LockerTest {
 
         Bag bag = new Bag();
         Ticket ticket = locker.saveBag(bag);
-        assertTrue(ticket instanceof Ticket);
+        assertNotNull(ticket);
     }
 
     @Test
