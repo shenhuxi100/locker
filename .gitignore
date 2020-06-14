@@ -4,3 +4,16 @@
 /build/classes/java/main/
 /build/classes/java/test/
 /.idea/
+.idea
+.gradle
+out
+build
+*.iml
+*.ipr
+*.iws
+target/
+build/
+.classpath
+.settings/
+.project
+bin/
