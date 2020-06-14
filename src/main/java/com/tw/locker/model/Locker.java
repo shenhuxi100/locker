@@ -33,4 +33,8 @@ class Locker {
 
         throw new InvalidTicketException();
     }
+
+    public boolean isFullFilled() {
+        return capacity <= lockerMap.size();
+    }
 }

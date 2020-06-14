@@ -1,5 +1,7 @@
 package com.tw.locker.model;
 
+import com.tw.locker.exception.NoCapacityException;
+
 import java.util.List;
 
 public class Robot {
@@ -10,7 +12,12 @@ public class Robot {
     }
 
     public Ticket saveBag(Bag bag) {
-        return lockers.get(0).saveBag(bag);
+        for (Locker locker : lockers) {
+            if (!locker.isFullFilled()) {
+                return locker.saveBag(bag);
+            }
+        }
+        throw new NoCapacityException();
     }
 
     public List<Locker> getLockers() {
