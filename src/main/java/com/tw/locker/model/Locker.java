@@ -37,4 +37,9 @@ class Locker {
     public boolean isFullFilled() {
         return capacity <= lockerMap.size();
     }
+
+
+    public boolean isValidTicket(Ticket ticket) {
+        return lockerMap.get(ticket) != null;
+    }
 }

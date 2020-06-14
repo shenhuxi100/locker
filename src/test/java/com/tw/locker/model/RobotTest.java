@@ -1,5 +1,6 @@
 package com.tw.locker.model;
 
+import com.tw.locker.exception.InvalidTicketException;
 import com.tw.locker.exception.NoCapacityException;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +10,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Given: 一个机器人有2的柜子，两个柜子都满， When: 存包 Then: 存包失败，提示柜子已满
  * Given: 一张无效票， When: 取包 Then: 提示无效票据
  * Given: 一张有效票， When: 取包 Then: 机器人返回一个包
  */
@@ -44,5 +44,12 @@ public class RobotTest {
 
         Bag thirdBag = new Bag();
         assertThrows(NoCapacityException.class, () -> robot.saveBag(thirdBag));
+    }
+
+    @Test
+    void should_throw_InvalidTicketException_when_take_bag_given_invalid_ticket() {
+        Robot robot = new Robot(Arrays.asList(new Locker(1), new Locker(1)));
+        Ticket invalidTicket = new Ticket();
+        assertThrows(InvalidTicketException.class, () -> robot.takeBag(invalidTicket));
     }
 }
