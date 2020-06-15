@@ -17,6 +17,7 @@ class LockerTest {
 
         Bag bag = new Bag();
         locker.saveBag(bag);
+
         assertThrows(NoCapacityException.class, () -> locker.saveBag(bag));
     }
 
@@ -27,6 +28,7 @@ class LockerTest {
 
         Bag bag = new Bag();
         Ticket ticket = locker.saveBag(bag);
+
         assertNotNull(ticket);
     }
 
@@ -55,7 +57,7 @@ class LockerTest {
     }
 
     @Test
-    void should_take_bag_which_is_same_with_saving_bag_when_take_bag_given_ticket_is_valid() {
+    void should_take_the_same_saving_bag_when_take_bag_given_ticket_is_valid() {
         int capacity = 10;
         Locker locker = new Locker(capacity);
 

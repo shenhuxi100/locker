@@ -25,10 +25,10 @@ public class Robot {
         return lockers;
     }
 
-    public Bag takeBag(Ticket invalidTicket) {
+    public Bag takeBag(Ticket ticket) {
         for (Locker locker : lockers) {
-            if (locker.isValidTicket(invalidTicket)) {
-                return locker.takeBag(invalidTicket);
+            if (locker.isValidTicket(ticket)) {
+                return locker.takeBag(ticket);
             }
         }
 

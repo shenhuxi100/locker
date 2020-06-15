@@ -8,6 +8,7 @@ import java.util.Map;
 
 class Locker {
     private int capacity;
+
     private Map<Ticket, Bag> lockerMap = new HashMap<>();
 
     public Locker(int capacity) {
@@ -41,5 +42,9 @@ class Locker {
 
     public boolean isValidTicket(Ticket ticket) {
         return lockerMap.get(ticket) != null;
+    }
+
+    public Map<Ticket, Bag> getLockerMap() {
+        return lockerMap;
     }
 }
