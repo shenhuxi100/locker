@@ -43,8 +43,4 @@ class Locker {
     public boolean isValidTicket(Ticket ticket) {
         return lockerMap.get(ticket) != null;
     }
-
-    public Map<Ticket, Bag> getLockerMap() {
-        return lockerMap;
-    }
 }

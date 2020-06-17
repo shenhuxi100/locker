@@ -25,7 +25,7 @@ public class RobotTest {
         Ticket ticket = robot.saveBag(bag);
 
         // assertNotNull(ticket); //looks duplicated test here, so comment here
-        assertEquals(robot.getLockers().get(0).getLockerMap().get(ticket), bag);
+        assertEquals(robot.getLockers().get(0).takeBag(ticket), bag);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class RobotTest {
 
         Ticket secondTicket = robot.saveBag(secondBag);
 
-        assertEquals(robot.getLockers().get(1).getLockerMap().get(secondTicket), secondBag);
+        assertEquals(robot.getLockers().get(1).takeBag(secondTicket), secondBag);
     }
 
     @Test
