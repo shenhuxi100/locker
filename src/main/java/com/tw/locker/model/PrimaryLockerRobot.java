@@ -5,10 +5,10 @@ import com.tw.locker.exception.NoCapacityException;
 
 import java.util.List;
 
-public class Robot {
+public class PrimaryLockerRobot {
     private List<Locker> lockers;
 
-    public Robot(List<Locker> lockers) {
+    public PrimaryLockerRobot(List<Locker> lockers) {
         this.lockers = lockers;
     }
 
@@ -19,10 +19,6 @@ public class Robot {
             }
         }
         throw new NoCapacityException();
-    }
-
-    public List<Locker> getLockers() {
-        return lockers;
     }
 
     public Bag takeBag(Ticket ticket) {

@@ -6,26 +6,30 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class RobotTest {
-    private Robot robot;
+public class PrimaryLockerRobotTest {
+    private PrimaryLockerRobot robot;
+    private List<Locker> lockers;
 
     @BeforeEach
     void getRobotWith2LockersWith1Cell() {
-        robot = new Robot(Arrays.asList(new Locker(1), new Locker(1)));
+        lockers = Arrays.asList(new Locker(1), new Locker(1));
+        robot = new PrimaryLockerRobot(lockers);
     }
 
     @Test
     void should_return_ticket_and_store_bag_in_1st_locker_when_save_bag_given_robot_manage_2_under_filled_lockers() {
         Bag bag = new Bag();
+        Locker firstLocker = lockers.get(0);
 
         Ticket ticket = robot.saveBag(bag);
 
         // assertNotNull(ticket); //looks duplicated test here, so comment here
-        assertEquals(robot.getLockers().get(0).takeBag(ticket), bag);
+        assertEquals(firstLocker.takeBag(ticket), bag);
     }
 
     @Test
@@ -33,10 +37,11 @@ public class RobotTest {
         Bag firstBag = new Bag();
         robot.saveBag(firstBag);
         Bag secondBag = new Bag();
+        Locker secondLocker = lockers.get(1);
 
         Ticket secondTicket = robot.saveBag(secondBag);
 
-        assertEquals(robot.getLockers().get(1).takeBag(secondTicket), secondBag);
+        assertEquals(secondLocker.takeBag(secondTicket), secondBag);
     }
 
     @Test
