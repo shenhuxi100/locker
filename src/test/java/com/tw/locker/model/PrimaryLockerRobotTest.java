@@ -74,9 +74,9 @@ class PrimaryLockerRobotTest {
     void should_return_the_same_saving_bag_when_primary_locker_robot_take_bag_given_valid_ticket_provided_by_smart_locker_robot_and_2_robots_manage_2_same_lockers() {
         Bag bag = new Bag();
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
-        Ticket validTicket = smartLockerRobot.saveBag(bag);
+        Ticket validTicketFromSmartLockerRobot = smartLockerRobot.saveBag(bag);
 
-        Bag returnBag = primaryLockerRobot.takeBag(validTicket);
+        Bag returnBag = primaryLockerRobot.takeBag(validTicketFromSmartLockerRobot);
         assertEquals(bag, returnBag);
     }
 
@@ -85,8 +85,8 @@ class PrimaryLockerRobotTest {
         Bag bag = new Bag();
         List<Locker> lockers2 = Arrays.asList(new Locker(1), new Locker(1));
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers2);
-        Ticket validTicket = smartLockerRobot.saveBag(bag);
+        Ticket validTicketFromSmartLockerRobot = smartLockerRobot.saveBag(bag);
 
-        assertThrows(InvalidTicketException.class, () -> primaryLockerRobot.takeBag(validTicket));
+        assertThrows(InvalidTicketException.class, () -> primaryLockerRobot.takeBag(validTicketFromSmartLockerRobot));
     }
 }

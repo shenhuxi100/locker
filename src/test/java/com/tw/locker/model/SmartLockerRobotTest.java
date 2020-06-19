@@ -10,11 +10,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-/**
- * Given SmartLockerRobot管理A，B两个柜子、PrimaryLockerRobot管理C，D两个柜子，并且PrimaryLockerRobot拿到一张由SmartLockerRobot存包获得的有效票，When PrimaryLockerRobot取包，Then 取包失败，提示无效票
- * <p>
- * Given SmartLockerRobot管理A，B两个柜子、PrimaryLockerRobot管理C，D两个柜子，并且SmartLockerRobot拿到一张由PrimaryLockerRobot存包获得的有效票，When SmartLockerRobot取包，Then 取包失败，提示无效票
- */
 class SmartLockerRobotTest {
     @Test
     void should_return_ticket_and_store_bag_in_1st_locker_when_smart_locker_robot_save_bag_given_smart_locker_robot_manage_2_under_filled_lockers_and_1st_locker_has_1_more_capacity_2nd_locker() {
@@ -91,9 +86,21 @@ class SmartLockerRobotTest {
         List<Locker> lockers = Arrays.asList(new Locker(1), new Locker(1));
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
-        Ticket validTicket = primaryLockerRobot.saveBag(bag);
+        Ticket validTicketFromPrimaryLockerRobot = primaryLockerRobot.saveBag(bag);
 
-        Bag returnBag = smartLockerRobot.takeBag(validTicket);
+        Bag returnBag = smartLockerRobot.takeBag(validTicketFromPrimaryLockerRobot);
         assertEquals(bag, returnBag);
+    }
+
+    @Test
+    void should_throw_InvalidTicketException_when_smart_locker_robot_take_bag_given_valid_ticket_provided_by_primary_locker_robot_and_2_robots_manage_2_different_under_filled_lockers() {
+        Bag bag = new Bag();
+        List<Locker> lockers = Arrays.asList(new Locker(1), new Locker(1));
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
+        List<Locker> lockers2 = Arrays.asList(new Locker(1), new Locker(1));
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers2);
+        Ticket validTicketFromPrimaryLockerRobot = primaryLockerRobot.saveBag(bag);
+
+        assertThrows(InvalidTicketException.class, () -> smartLockerRobot.takeBag(validTicketFromPrimaryLockerRobot));
     }
 }
