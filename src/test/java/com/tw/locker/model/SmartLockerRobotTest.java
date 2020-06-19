@@ -8,8 +8,6 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Given SmartLockerRobot管理两个柜子，第二个柜子比第一个柜子可用容量多1，When SmartLockerRobot存包，Then 存第二个柜子，返回一张票
- *
  * Given SmartLockerRobot管理两个柜子，两个柜子可用容量相同，When SmartLockerRobot存包，Then 存第一个柜子，返回一张票
  *
  * Given SmartLockerRobot管理两个柜子，两个柜子容量均已存满，When SmartLockerRobot存包，Then 存包失败，提示柜子已满
@@ -49,5 +47,17 @@ class SmartLockerRobotTest {
         Ticket ticket = smartLockerRobot.saveBag(bag);
 
         assertEquals(secondLocker.takeBag(ticket), bag);
+    }
+
+    @Test
+    void should_return_ticket_and_store_bag_in_1st_locker_when_save_bag_given_smart_locker_robot_manage_2_same_remaining_capacity_under_filled_lockers() {
+        Bag bag = new Bag();
+        List<Locker> lockers = Arrays.asList(new Locker(1), new Locker(1));
+        Locker firstLocker = lockers.get(0);
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
+
+        Ticket ticket = smartLockerRobot.saveBag(bag);
+
+        assertEquals(firstLocker.takeBag(ticket), bag);
     }
 }
