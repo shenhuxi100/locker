@@ -11,8 +11,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Given SmartLockerRobot、PrimaryLockerRobot同时管理两个柜子，并且PrimaryLockerRobot拿到一张由SmartLockerRobot存包获得的有效票，When PrimaryLockerRobot取包，Then PrimaryLockerRobot返回一个包
- * <p>
  * Given SmartLockerRobot、PrimaryLockerRobot同时管理两个柜子，并且SmartLockerRobot拿到一张由PrimaryLockerRobot存包获得的有效票，When SmartLockerRobot取包，Then SmartLockerRobot返回一个包
  * <p>
  * Given SmartLockerRobot管理A，B两个柜子、PrimaryLockerRobot管理C，D两个柜子，并且PrimaryLockerRobot拿到一张由SmartLockerRobot存包获得的有效票，When PrimaryLockerRobot取包，Then 取包失败，提示无效票
@@ -87,5 +85,17 @@ class SmartLockerRobotTest {
         Ticket invalidTicket = new Ticket();
 
         assertThrows(InvalidTicketException.class, () -> smartLockerRobot.takeBag(invalidTicket));
+    }
+
+    @Test
+    void should_return_the_same_saving_bag_when_smart_locker_robot_take_bag_given_valid_ticket_provided_by_primary_locker_robot_and_2_robots_manage_2_same_lockers() {
+        Bag bag = new Bag();
+        List<Locker> lockers = Arrays.asList(new Locker(1), new Locker(1));
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(lockers);
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
+        Ticket validTicket = primaryLockerRobot.saveBag(bag);
+
+        Bag returnBag = smartLockerRobot.takeBag(validTicket);
+        assertEquals(bag, returnBag);
     }
 }
