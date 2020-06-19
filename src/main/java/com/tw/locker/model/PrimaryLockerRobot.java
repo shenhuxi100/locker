@@ -14,7 +14,7 @@ public class PrimaryLockerRobot {
 
     public Ticket saveBag(Bag bag) {
         for (Locker locker : lockers) {
-            if (!locker.isFullFilled()) {
+            if (locker.getRemainingCapacity()>0) {
                 return locker.saveBag(bag);
             }
         }
