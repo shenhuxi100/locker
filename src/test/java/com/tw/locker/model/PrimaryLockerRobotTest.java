@@ -16,7 +16,7 @@ class PrimaryLockerRobotTest {
     private List<Locker> lockers;
 
     @BeforeEach
-    void getRobotWith2LockersWith1Cell() {
+    void getPrimaryLockerRobotWith2LockersWith1Cell() {
         lockers = Arrays.asList(new Locker(1), new Locker(1));
         primaryLockerRobot = new PrimaryLockerRobot(lockers);
     }
