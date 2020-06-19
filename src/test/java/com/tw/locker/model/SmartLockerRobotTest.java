@@ -1,5 +1,6 @@
 package com.tw.locker.model;
 
+import com.tw.locker.exception.InvalidTicketException;
 import com.tw.locker.exception.NoCapacityException;
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +11,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Given SmartLockerRobot管理两个柜子，并且SmartLockerRobot拿到一张由SmartLockerRobot存包获得的有效票，When SmartLockerRobot取包，Then SmartLockerRobot返回一个包
- * <p>
  * Given SmartLockerRobot管理两个柜子，并且SmartLockerRobot拿到一张伪造票，When SmartLockerRobot取包，Then 取包失败，提示无效票
  * <p>
  * Given SmartLockerRobot、PrimaryLockerRobot同时管理两个柜子，并且PrimaryLockerRobot拿到一张由SmartLockerRobot存包获得的有效票，When PrimaryLockerRobot取包，Then PrimaryLockerRobot返回一个包
@@ -73,7 +72,7 @@ class SmartLockerRobotTest {
     }
 
     @Test
-    void should_return_the_same_saving_bag_when_take_bag_given_valid_ticket_and_smart_locker_robot_manage_2_lockers() {
+    void should_return_the_same_saving_bag_when_take_bag_given_valid_ticket_and_smart_locker_robot_manage_2_under_filled_lockers() {
         Bag bag = new Bag();
         List<Locker> lockers = Arrays.asList(new Locker(1), new Locker(1));
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
@@ -81,5 +80,14 @@ class SmartLockerRobotTest {
 
         Bag returnBag = smartLockerRobot.takeBag(validTicket);
         assertEquals(bag, returnBag);
+    }
+
+    @Test
+    void should_throw_InvalidTicketException_when_take_bag_given_invalid_ticket_and_smart_locker_robot_manage_2_under_filled_lockers() {
+        List<Locker> lockers = Arrays.asList(new Locker(1), new Locker(1));
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
+        Ticket invalidTicket = new Ticket();
+
+        assertThrows(InvalidTicketException.class, () -> smartLockerRobot.takeBag(invalidTicket));
     }
 }
