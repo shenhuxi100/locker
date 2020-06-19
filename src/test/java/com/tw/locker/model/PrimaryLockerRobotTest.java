@@ -79,4 +79,14 @@ class PrimaryLockerRobotTest {
         Bag returnBag = primaryLockerRobot.takeBag(validTicket);
         assertEquals(bag, returnBag);
     }
+
+    @Test
+    void should_throw_InvalidTicketException_when_primary_locker_robot_take_bag_given_valid_ticket_provided_by_smart_locker_robot_and_2_robots_manage_2_different_under_filled_lockers() {
+        Bag bag = new Bag();
+        List<Locker> lockers2 = Arrays.asList(new Locker(1), new Locker(1));
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers2);
+        Ticket validTicket = smartLockerRobot.saveBag(bag);
+
+        assertThrows(InvalidTicketException.class, () -> primaryLockerRobot.takeBag(validTicket));
+    }
 }
