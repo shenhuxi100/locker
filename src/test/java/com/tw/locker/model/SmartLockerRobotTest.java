@@ -10,8 +10,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Given SmartLockerRobot管理两个柜子，两个柜子容量均已存满，When SmartLockerRobot存包，Then 存包失败，提示柜子已满
- * <p>
  * Given SmartLockerRobot管理两个柜子，并且SmartLockerRobot拿到一张由SmartLockerRobot存包获得的有效票，When SmartLockerRobot取包，Then SmartLockerRobot返回一个包
  * <p>
  * Given SmartLockerRobot管理两个柜子，并且SmartLockerRobot拿到一张伪造票，When SmartLockerRobot取包，Then 取包失败，提示无效票
@@ -72,5 +70,16 @@ class SmartLockerRobotTest {
 
         Bag thirdBag = new Bag();
         assertThrows(NoCapacityException.class, () -> smartLockerRobot.saveBag(thirdBag));
+    }
+
+    @Test
+    void should_return_the_same_saving_bag_when_take_bag_given_valid_ticket_and_smart_locker_robot_manage_2_lockers() {
+        Bag bag = new Bag();
+        List<Locker> lockers = Arrays.asList(new Locker(1), new Locker(1));
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
+        Ticket validTicket = smartLockerRobot.saveBag(bag);
+
+        Bag returnBag = smartLockerRobot.takeBag(validTicket);
+        assertEquals(bag, returnBag);
     }
 }
