@@ -1,27 +1,27 @@
 package com.tw.locker.model;
 
+import com.tw.locker.exception.NoCapacityException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Given SmartLockerRobot管理两个柜子，两个柜子可用容量相同，When SmartLockerRobot存包，Then 存第一个柜子，返回一张票
- *
  * Given SmartLockerRobot管理两个柜子，两个柜子容量均已存满，When SmartLockerRobot存包，Then 存包失败，提示柜子已满
- *
+ * <p>
  * Given SmartLockerRobot管理两个柜子，并且SmartLockerRobot拿到一张由SmartLockerRobot存包获得的有效票，When SmartLockerRobot取包，Then SmartLockerRobot返回一个包
- *
+ * <p>
  * Given SmartLockerRobot管理两个柜子，并且SmartLockerRobot拿到一张伪造票，When SmartLockerRobot取包，Then 取包失败，提示无效票
- *
+ * <p>
  * Given SmartLockerRobot、PrimaryLockerRobot同时管理两个柜子，并且PrimaryLockerRobot拿到一张由SmartLockerRobot存包获得的有效票，When PrimaryLockerRobot取包，Then PrimaryLockerRobot返回一个包
- *
+ * <p>
  * Given SmartLockerRobot、PrimaryLockerRobot同时管理两个柜子，并且SmartLockerRobot拿到一张由PrimaryLockerRobot存包获得的有效票，When SmartLockerRobot取包，Then SmartLockerRobot返回一个包
- *
+ * <p>
  * Given SmartLockerRobot管理A，B两个柜子、PrimaryLockerRobot管理C，D两个柜子，并且PrimaryLockerRobot拿到一张由SmartLockerRobot存包获得的有效票，When PrimaryLockerRobot取包，Then 取包失败，提示无效票
- *
+ * <p>
  * Given SmartLockerRobot管理A，B两个柜子、PrimaryLockerRobot管理C，D两个柜子，并且SmartLockerRobot拿到一张由PrimaryLockerRobot存包获得的有效票，When SmartLockerRobot取包，Then 取包失败，提示无效票
  */
 class SmartLockerRobotTest {
@@ -59,5 +59,18 @@ class SmartLockerRobotTest {
         Ticket ticket = smartLockerRobot.saveBag(bag);
 
         assertEquals(firstLocker.takeBag(ticket), bag);
+    }
+
+    @Test
+    void should_throw_NoCapacityException_when_save_bag_given_smart_locker_robot_manage_2_full_lockers() {
+        List<Locker> lockers = Arrays.asList(new Locker(1), new Locker(1));
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(lockers);
+        Bag bag = new Bag();
+        smartLockerRobot.saveBag(bag);
+        bag = new Bag();
+        smartLockerRobot.saveBag(bag);
+
+        Bag thirdBag = new Bag();
+        assertThrows(NoCapacityException.class, () -> smartLockerRobot.saveBag(thirdBag));
     }
 }
