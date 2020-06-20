@@ -15,8 +15,7 @@ public class SmartLockerRobot {
     }
 
     public Ticket saveBag(Bag bag) {
-        lockers = lockers.stream().sorted(Comparator.comparing(Locker::getRemainingCapacity).reversed()).collect(Collectors.toList());
-
+        lockers.sort(Comparator.comparing(Locker::getRemainingCapacity).reversed());
         for (Locker locker : lockers) {
             if (locker.getRemainingCapacity() > 0) {
                 return locker.saveBag(bag);
