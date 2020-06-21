@@ -29,11 +29,7 @@ public abstract class BaseLockerRobot {
     }
 
     public boolean isValidTicket(Ticket ticket) {
-        boolean validTicket = false;
-        for (Locker locker : lockers){
-            validTicket = locker.isValidTicket(ticket);
-        }
-        return validTicket;
+        return lockers.stream().anyMatch(locker -> locker.isValidTicket(ticket));
     }
 
     public abstract Ticket saveBag(Bag bag);
