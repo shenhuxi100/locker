@@ -15,7 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LockerRobotManagerTest {
     /*
-Given LockerRobotManager管理1个robot & 1个locker & 有效票据，When 让LockerRobotManager取包，Then 返回一个包
 
 Given LockerRobotManager管理1个robot & 1个locker & 无效票据，When 让LockerRobotManager取包，Then 取包失败，提示无效票
      */
@@ -199,5 +198,17 @@ Given LockerRobotManager管理1个robot & 1个locker & 无效票据，When 让Lo
 
         assertEquals(firstBag, lockerRobotManage.takeBag(firstTicket));
         assertEquals(secondBag, lockerRobotManage.takeBag(secondTicket));
+    }
+
+    @Test
+    void should_throw_InvalidTicketException_when_LockerRobotManager_take_bag_given_manage_1_locker_1_robot_and_invalid_ticket() {
+        SmartLockerRobot firstSmartLockerRobot = new SmartLockerRobot(asList(new Locker(1)));
+        Locker firstLocker = new Locker(1);
+        LockerRobotManager lockerRobotManage = new LockerRobotManager(asList(firstLocker), asList(firstSmartLockerRobot));
+
+        Bag bag = new Bag();
+        lockerRobotManage.saveBag(bag);
+
+        assertThrows(InvalidTicketException.class, () -> lockerRobotManage.takeBag(new Ticket()));
     }
 }
