@@ -14,8 +14,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LockerRobotManagerTest {
     /*
-Given LockerRobotManager管理2个柜子已满的PrimaryLockerRobot & 未管理柜子，When 让LockerRobotManager存包，Then 存包失败，提示柜子已满
-     *
+Given LockerRobotManager管理均有空间的1个SmartLockerRobot & 一个柜子，When 让LockerRobotManager存包，Then robot成功存入，Manager返回票据
+
+Given LockerRobotManager管理1个已满的SmartLockerRobot & 一个未满的柜子，When 让LockerRobotManager存包，Then locker成功存入，Manager返回票据
+
+Given LockerRobotManager管理均已满的1个SmartLockerRobot & 一个柜子，When 让LockerRobotManager存包，Then 存包失败，提示柜子已满
      */
     @Test
     void should_save_in_first_locker_and_return_ticket_when_LockerRobotManager_save_bag_given_manage_2_unfilled_locker_not_manage_robot() {
@@ -91,5 +94,17 @@ Given LockerRobotManager管理2个柜子已满的PrimaryLockerRobot & 未管理�
         Ticket ticket = lockerRobotManage.saveBag(bag);
 
         assertThrows(NoCapacityException.class, () -> lockerRobotManage.saveBag(new Bag()));
+    }
+
+    @Test
+    void should_save_bag_by_robot_when_LockerRobotManager_save_bag_given_manage_1_unfilled_robot_and_1_unfilled_locker() {
+        SmartLockerRobot firstSmartLockerRobot = new SmartLockerRobot(asList(new Locker(1)));
+        Locker firstLocker = new Locker(1);
+        LockerRobotManager lockerRobotManage = new LockerRobotManager(asList(firstLocker), asList(firstSmartLockerRobot));
+
+        Bag bag = new Bag();
+        Ticket ticket = lockerRobotManage.saveBag(bag);
+
+        assertEquals(bag, firstSmartLockerRobot.takeBag(ticket));
     }
 }

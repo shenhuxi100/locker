@@ -18,15 +18,15 @@ public class LockerRobotManager {
     }
 
     public Ticket saveBag(Bag bag) {
-        for (Locker locker : lockers) {
-            if (locker.getRemainingCapacity() > 0) {
-                return locker.saveBag(bag);
-            }
-        }
-
         for (BaseLockerRobot robot : robots) {
             if (robot.getRemainingCapacity() > 0) {
                 return robot.saveBag(bag);
+            }
+        }
+
+        for (Locker locker : lockers) {
+            if (locker.getRemainingCapacity() > 0) {
+                return locker.saveBag(bag);
             }
         }
 
