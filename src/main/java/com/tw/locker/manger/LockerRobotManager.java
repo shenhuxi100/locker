@@ -32,4 +32,8 @@ public class LockerRobotManager {
 
         throw new NoCapacityException();
     }
+
+    public Bag takeBag(Ticket ticket) {
+        return lockers.get(0).takeBag(ticket);
+    }
 }
