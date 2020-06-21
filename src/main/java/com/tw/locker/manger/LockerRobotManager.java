@@ -1,5 +1,6 @@
 package com.tw.locker.manger;
 
+import com.tw.locker.exception.NoCapacityException;
 import com.tw.locker.model.Bag;
 import com.tw.locker.model.Locker;
 import com.tw.locker.model.Ticket;
@@ -23,6 +24,7 @@ public class LockerRobotManager {
                 return locker.saveBag(bag);
             }
         }
-        return null;
+
+        throw new NoCapacityException();
     }
 }

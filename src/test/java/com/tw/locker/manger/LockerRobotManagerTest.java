@@ -1,5 +1,6 @@
 package com.tw.locker.manger;
 
+import com.tw.locker.exception.NoCapacityException;
 import com.tw.locker.model.Bag;
 import com.tw.locker.model.Locker;
 import com.tw.locker.model.Ticket;
@@ -13,8 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LockerRobotManagerTest {
     /*
-     * Given LockerRobotManager管理2个locker & 第一个柜子已满，第二个未满 & 未管理robot，When 让LockerRobotManager存包，Then 成功存入第二个柜子，Manager返回票据
-     *
      * Given LockerRobotManager管理2个已满的locker & 未管理robot，When 让LockerRobotManager存包，Then 存包失败，提示柜子已满
      *
      */
@@ -37,8 +36,21 @@ class LockerRobotManagerTest {
         Bag bag = new Bag();
 
         lockerRobotManage.saveBag(bag);
+        bag = new Bag();
         Ticket ticket = lockerRobotManage.saveBag(bag);
 
         assertEquals(bag, secondLocker.takeBag(ticket));
+    }
+
+    @Test
+    void should_throw_NoCapacityException_when_LockerRobotManager_save_bag_given_manage_2_filled_locker_not_manage_robot() {
+        Locker firstLocker = new Locker(1);
+        LockerRobotManager lockerRobotManage = new LockerRobotManager(Arrays.asList(firstLocker, new Locker(1)), Arrays.asList(new BaseLockerRobot(Collections.emptyList())));
+        Bag bag = new Bag();
+
+        lockerRobotManage.saveBag(bag);
+        lockerRobotManage.saveBag(bag);
+
+        assertThrows(NoCapacityException.class, () -> lockerRobotManage.saveBag(new Bag()));
     }
 }
