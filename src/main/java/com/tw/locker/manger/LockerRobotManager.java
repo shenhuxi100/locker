@@ -6,7 +6,6 @@ import com.tw.locker.model.Locker;
 import com.tw.locker.model.Ticket;
 import com.tw.locker.robot.BaseLockerRobot;
 
-import java.awt.*;
 import java.util.List;
 
 public class LockerRobotManager {
@@ -24,6 +23,8 @@ public class LockerRobotManager {
                 return locker.saveBag(bag);
             }
         }
+        if (robots.size() > 0)
+            return robots.get(0).saveBag(bag);
 
         throw new NoCapacityException();
     }

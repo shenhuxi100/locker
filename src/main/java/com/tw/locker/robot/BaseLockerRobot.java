@@ -7,7 +7,7 @@ import com.tw.locker.model.Ticket;
 
 import java.util.List;
 
-public class BaseLockerRobot {
+public abstract class BaseLockerRobot {
     protected List<Locker> lockers;
 
     public BaseLockerRobot(List<Locker> lockers) {
@@ -23,4 +23,6 @@ public class BaseLockerRobot {
 
         throw new InvalidTicketException();
     }
+
+    public abstract Ticket saveBag(Bag bag);
 }
