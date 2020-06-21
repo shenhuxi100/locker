@@ -25,7 +25,15 @@ public abstract class BaseLockerRobot {
     }
 
     public int getRemainingCapacity() {
-        return lockers.stream().mapToInt(locker -> locker.getRemainingCapacity()).sum();
+        return lockers.stream().mapToInt(Locker::getRemainingCapacity).sum();
+    }
+
+    public boolean isValidTicket(Ticket ticket) {
+        boolean validTicket = false;
+        for (Locker locker : lockers){
+            validTicket = locker.isValidTicket(ticket);
+        }
+        return validTicket;
     }
 
     public abstract Ticket saveBag(Bag bag);

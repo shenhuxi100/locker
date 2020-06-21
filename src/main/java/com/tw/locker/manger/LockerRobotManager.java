@@ -42,7 +42,8 @@ public class LockerRobotManager {
         }
 
         for (BaseLockerRobot robot : robots) {
-            return robot.takeBag(ticket);
+            if (robot.isValidTicket(ticket))
+                return robot.takeBag(ticket);
         }
 
         throw new InvalidTicketException();
