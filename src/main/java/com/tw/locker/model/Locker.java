@@ -6,7 +6,7 @@ import com.tw.locker.exception.NoCapacityException;
 import java.util.HashMap;
 import java.util.Map;
 
-class Locker {
+public class Locker {
     private int capacity;
 
     private Map<Ticket, Bag> lockerMap = new HashMap<>();

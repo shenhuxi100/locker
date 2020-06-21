@@ -1,16 +1,16 @@
-package com.tw.locker.model;
+package com.tw.locker.robot;
 
-import com.tw.locker.exception.InvalidTicketException;
 import com.tw.locker.exception.NoCapacityException;
+import com.tw.locker.model.Bag;
+import com.tw.locker.model.Locker;
+import com.tw.locker.model.Ticket;
 
 import java.util.Comparator;
 import java.util.List;
 
-public class SmartLockerRobot {
-    private List<Locker> lockers;
-
+public class SmartLockerRobot extends BaseLockerRobot{
     public SmartLockerRobot(List<Locker> lockers) {
-        this.lockers = lockers;
+        super(lockers);
     }
 
     public Ticket saveBag(Bag bag) {
@@ -20,15 +20,5 @@ public class SmartLockerRobot {
         }
 
         throw new NoCapacityException();
-    }
-
-    public Bag takeBag(Ticket ticket) {
-        for (Locker locker : lockers) {
-            if (locker.isValidTicket(ticket)) {
-                return locker.takeBag(ticket);
-            }
-        }
-
-        throw new InvalidTicketException();
     }
 }

@@ -1,4 +1,4 @@
 package com.tw.locker.model;
 
-class Ticket {
+public class Ticket {
 }

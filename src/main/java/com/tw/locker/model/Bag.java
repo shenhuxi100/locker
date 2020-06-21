@@ -1,4 +1,4 @@
 package com.tw.locker.model;
 
-class Bag {
+public class Bag {
 }
