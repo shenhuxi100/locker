@@ -43,3 +43,38 @@ Given SmartLockerRobot、PrimaryLockerRobot同时管理两个柜子，并且Smar
 Given SmartLockerRobot管理A，B两个柜子、PrimaryLockerRobot管理C，D两个柜子，并且PrimaryLockerRobot拿到一张由SmartLockerRobot存包获得的有效票，When PrimaryLockerRobot取包，Then 取包失败，提示无效票
 
 Given SmartLockerRobot管理A，B两个柜子、PrimaryLockerRobot管理C，D两个柜子，并且SmartLockerRobot拿到一张由PrimaryLockerRobot存包获得的有效票，When SmartLockerRobot取包，Then 取包失败，提示无效票
+
+## Locker Robot Manager
+### Tasking: 
+Given LockerRobotManager管理2个locker & 两个locker均有空间 & 未管理robot，When 让LockerRobotManager存包，Then 成功存入第一个柜子，Manager返回票据
+
+Given LockerRobotManager管理2个locker & 第一个柜子已满，第二个未满 & 未管理robot，When 让LockerRobotManager存包，Then 成功存入第二个柜子，Manager返回票据
+
+Given LockerRobotManager管理2个已满的locker & 未管理robot，When 让LockerRobotManager存包，Then 存包失败，提示柜子已满
+
+
+Given LockerRobotManager管理2个柜子未满的SmartLockerRobot & 未管理柜子，When 让LockerRobotManager存包，Then 第一个SmartLockerRobot存包，Manager返回一张票
+
+Given LockerRobotManager管理2个PrimaryLockerRobot & 第一个robot的柜子已满，第二个robot未满 & 未管理柜子，When 让LockerRobotManager存包，Then 第二个PrimaryLockerRobot存包，Manager返回一张票
+
+Given LockerRobotManager管理2个柜子已满的PrimaryLockerRobot & 未管理柜子，When 让LockerRobotManager存包，Then 存包失败，提示柜子已满
+
+
+Given LockerRobotManager管理均有空间的1个SmartLockerRobot & 一个柜子，When 让LockerRobotManager存包，Then robot成功存入，Manager返回票据
+
+Given LockerRobotManager管理1个已满的SmartLockerRobot & 一个未满的柜子，When 让LockerRobotManager存包，Then locker成功存入，Manager返回票据
+
+Given LockerRobotManager管理均已满的1个SmartLockerRobot & 一个柜子，When 让LockerRobotManager存包，Then 存包失败，提示柜子已满
+
+
+Given LockerRobotManager管理2个locker & 未管理robot & 有效票据，When 让LockerRobotManager取包，Then 返回一个包
+
+Given LockerRobotManager管理2个locker & 未管理robot & 无效票据，When 让LockerRobotManager取包，Then 取包失败，提示无效票
+
+Given LockerRobotManager管理2个robot & 未管理locker & 有效票据，When 让LockerRobotManager取包，Then 返回一个包
+
+Given LockerRobotManager管理2个robot & 未管理locker & 无效票据，When 让LockerRobotManager取包，Then 取包失败，提示无效票
+
+Given LockerRobotManager管理1个robot & 1个locker & 有效票据，When 让LockerRobotManager取包，Then 返回一个包
+
+Given LockerRobotManager管理1个robot & 1个locker & 无效票据，When 让LockerRobotManager取包，Then 取包失败，提示无效票
