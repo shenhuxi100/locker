@@ -5,7 +5,6 @@ import com.tw.locker.exception.NoCapacityException;
 
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class SmartLockerRobot {
     private List<Locker> lockers;
@@ -16,10 +15,8 @@ public class SmartLockerRobot {
 
     public Ticket saveBag(Bag bag) {
         lockers.sort(Comparator.comparing(Locker::getRemainingCapacity).reversed());
-        for (Locker locker : lockers) {
-            if (locker.getRemainingCapacity() > 0) {
-                return locker.saveBag(bag);
-            }
+        if (!lockers.isEmpty() && lockers.get(0).getRemainingCapacity() > 0) {
+            return lockers.get(0).saveBag(bag);
         }
 
         throw new NoCapacityException();
