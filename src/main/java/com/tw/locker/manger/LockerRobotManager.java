@@ -1,5 +1,6 @@
 package com.tw.locker.manger;
 
+import com.tw.locker.exception.InvalidTicketException;
 import com.tw.locker.exception.NoCapacityException;
 import com.tw.locker.model.Bag;
 import com.tw.locker.model.Locker;
@@ -34,6 +35,16 @@ public class LockerRobotManager {
     }
 
     public Bag takeBag(Ticket ticket) {
-        return lockers.get(0).takeBag(ticket);
+        for (Locker locker : lockers) {
+            if (locker.isValidTicket(ticket)) {
+                return locker.takeBag(ticket);
+            }
+        }
+
+        for (BaseLockerRobot robot : robots) {
+            return robot.takeBag(ticket);
+        }
+
+        throw new InvalidTicketException();
     }
 }

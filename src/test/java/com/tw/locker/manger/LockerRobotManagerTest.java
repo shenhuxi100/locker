@@ -145,6 +145,7 @@ Given LockerRobotManager管理1个robot & 1个locker & 无效票据，When 让Lo
         LockerRobotManager lockerRobotManage = new LockerRobotManager(asList(firstLocker, new Locker(1)), asList(new PrimaryLockerRobot((emptyList()))));
 
         Bag bag = new Bag();
+        lockerRobotManage.saveBag(bag);
         Ticket ticket = lockerRobotManage.saveBag(bag);
 
         assertEquals(bag, lockerRobotManage.takeBag(ticket));
@@ -159,5 +160,16 @@ Given LockerRobotManager管理1个robot & 1个locker & 无效票据，When 让Lo
         lockerRobotManage.saveBag(bag);
 
         assertThrows(InvalidTicketException.class, () -> lockerRobotManage.takeBag(new Ticket()));
+    }
+
+    @Test
+    void should_return_bag_when_LockerRobotManager_take_bag_given_manage_2_robot_not_manage_locker() {
+        SmartLockerRobot firstSmartLockerRobot = new SmartLockerRobot(asList(new Locker(1)));
+        LockerRobotManager lockerRobotManage = new LockerRobotManager(emptyList(), asList(firstSmartLockerRobot, new SmartLockerRobot(asList(new Locker(1)))));
+        Bag bag = new Bag();
+
+        Ticket ticket = lockerRobotManage.saveBag(bag);
+
+        assertEquals(bag, lockerRobotManage.takeBag(ticket));
     }
 }
