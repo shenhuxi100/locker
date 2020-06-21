@@ -1,5 +1,6 @@
 package com.tw.locker.manger;
 
+import com.tw.locker.exception.InvalidTicketException;
 import com.tw.locker.exception.NoCapacityException;
 import com.tw.locker.model.Bag;
 import com.tw.locker.model.Locker;
@@ -14,8 +15,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LockerRobotManagerTest {
     /*
-Given LockerRobotManager管理2个locker & 未管理robot & 有效票据，When 让LockerRobotManager取包，Then 返回一个包
-
 Given LockerRobotManager管理2个locker & 未管理robot & 无效票据，When 让LockerRobotManager取包，Then 取包失败，提示无效票
 
 Given LockerRobotManager管理2个robot & 未管理locker & 有效票据，When 让LockerRobotManager取包，Then 返回一个包
@@ -143,7 +142,7 @@ Given LockerRobotManager管理1个robot & 1个locker & 无效票据，When 让Lo
     }
 
     @Test
-    void should_return_bag_when_LockerRobotManager_take_bag_given_manage_2_unfilled_locker_not_manage_robot_and_valid_ticket() {
+    void should_return_bag_when_LockerRobotManager_take_bag_given_manage_2_unfilled_locker_not_manage_robot_and_invalid_ticket() {
         Locker firstLocker = new Locker(1);
         LockerRobotManager lockerRobotManage = new LockerRobotManager(asList(firstLocker, new Locker(1)), asList(new PrimaryLockerRobot((emptyList()))));
 
@@ -151,5 +150,16 @@ Given LockerRobotManager管理1个robot & 1个locker & 无效票据，When 让Lo
         Ticket ticket = lockerRobotManage.saveBag(bag);
 
         assertEquals(bag, lockerRobotManage.takeBag(ticket));
+    }
+
+    @Test
+    void should_return_bag_when_LockerRobotManager_take_bag_given_manage_2_unfilled_locker_not_manage_robot_and_valid_ticket() {
+        Locker firstLocker = new Locker(1);
+        LockerRobotManager lockerRobotManage = new LockerRobotManager(asList(firstLocker, new Locker(1)), asList(new PrimaryLockerRobot((emptyList()))));
+
+        Bag bag = new Bag();
+        lockerRobotManage.saveBag(bag);
+
+        assertThrows(InvalidTicketException.class, () -> lockerRobotManage.takeBag(new Ticket()));
     }
 }
