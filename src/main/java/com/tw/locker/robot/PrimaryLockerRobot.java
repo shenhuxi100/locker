@@ -7,14 +7,14 @@ import com.tw.locker.model.Ticket;
 
 import java.util.List;
 
-public class PrimaryLockerRobot extends BaseLockerRobot{
+public class PrimaryLockerRobot extends BaseLockerRobot {
     public PrimaryLockerRobot(List<Locker> lockers) {
         super(lockers);
     }
 
     public Ticket saveBag(Bag bag) {
         for (Locker locker : lockers) {
-            if (locker.getRemainingCapacity()>0) {
+            if (locker.getRemainingCapacity() > 0) {
                 return locker.saveBag(bag);
             }
         }

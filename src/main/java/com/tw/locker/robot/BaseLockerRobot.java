@@ -24,5 +24,9 @@ public abstract class BaseLockerRobot {
         throw new InvalidTicketException();
     }
 
+    public int getRemainingCapacity() {
+        return lockers.stream().mapToInt(locker -> locker.getRemainingCapacity()).sum();
+    }
+
     public abstract Ticket saveBag(Bag bag);
 }
