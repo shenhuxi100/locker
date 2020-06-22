@@ -5,8 +5,6 @@ import com.tw.locker.exception.NoCapacityException;
 import com.tw.locker.model.Bag;
 import com.tw.locker.model.Locker;
 import com.tw.locker.model.Ticket;
-import com.tw.locker.robot.PrimaryLockerRobot;
-import com.tw.locker.robot.SmartLockerRobot;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

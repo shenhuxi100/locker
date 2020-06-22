@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -55,8 +56,8 @@ class LockerRobotManagerTest {
 
     @Test
     void should_save_in_first_robot_and_return_ticket_when_LockerRobotManager_save_bag_given_manage_2_unfilled_robot_and_not_manage_locker() {
-        SmartLockerRobot firstSmartLockerRobot = new SmartLockerRobot(asList(new Locker(1)));
-        SmartLockerRobot secondSmartLockerRobot = new SmartLockerRobot(asList(new Locker(1)));
+        SmartLockerRobot firstSmartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
+        SmartLockerRobot secondSmartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
         LockerRobotManager lockerRobotManager = new LockerRobotManager(emptyList(), asList(firstSmartLockerRobot, secondSmartLockerRobot));
 
         Bag bag = new Bag();
@@ -67,8 +68,8 @@ class LockerRobotManagerTest {
 
     @Test
     void should_save_in_first_robot_and_return_ticket_when_LockerRobotManager_save_bag_given_manage_2_robot_and_2nd_unfilled_robot_and_1st_filled_robot_and_not_manage_locker() {
-        PrimaryLockerRobot firstPrimaryLockerRobot = new PrimaryLockerRobot(asList(new Locker(1)));
-        PrimaryLockerRobot secondPrimaryLockerRobot = new PrimaryLockerRobot(asList(new Locker(1)));
+        PrimaryLockerRobot firstPrimaryLockerRobot = new PrimaryLockerRobot(singletonList(new Locker(1)));
+        PrimaryLockerRobot secondPrimaryLockerRobot = new PrimaryLockerRobot(singletonList(new Locker(1)));
         LockerRobotManager lockerRobotManager = new LockerRobotManager(emptyList(), asList(firstPrimaryLockerRobot, secondPrimaryLockerRobot));
 
         Bag bag = new Bag();
@@ -81,8 +82,8 @@ class LockerRobotManagerTest {
 
     @Test
     void should_throw_NoCapacityException_when_LockerRobotManager_save_bag_given_manage_2_filled_robot_and_not_manage_locker() {
-        PrimaryLockerRobot firstPrimaryLockerRobot = new PrimaryLockerRobot(asList(new Locker(1)));
-        PrimaryLockerRobot secondPrimaryLockerRobot = new PrimaryLockerRobot(asList(new Locker(1)));
+        PrimaryLockerRobot firstPrimaryLockerRobot = new PrimaryLockerRobot(singletonList(new Locker(1)));
+        PrimaryLockerRobot secondPrimaryLockerRobot = new PrimaryLockerRobot(singletonList(new Locker(1)));
         LockerRobotManager lockerRobotManager = new LockerRobotManager(emptyList(), asList(firstPrimaryLockerRobot, secondPrimaryLockerRobot));
 
         lockerRobotManager.saveBag(new Bag());
@@ -93,9 +94,9 @@ class LockerRobotManagerTest {
 
     @Test
     void should_save_bag_by_robot_when_LockerRobotManager_save_bag_given_manage_1_unfilled_robot_and_1_unfilled_locker() {
-        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(asList(new Locker(1)));
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
         Locker locker = new Locker(1);
-        LockerRobotManager lockerRobotManager = new LockerRobotManager(asList(locker), asList(smartLockerRobot));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(singletonList(locker), singletonList(smartLockerRobot));
 
         Bag bag = new Bag();
         Ticket ticket = lockerRobotManager.saveBag(bag);
@@ -105,9 +106,9 @@ class LockerRobotManagerTest {
 
     @Test
     void should_save_bag_by_locker_when_LockerRobotManager_save_bag_given_manage_1_filled_robot_and_1_unfilled_locker() {
-        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(asList(new Locker(1)));
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
         Locker locker = new Locker(1);
-        LockerRobotManager lockerRobotManager = new LockerRobotManager(asList(locker), asList(smartLockerRobot));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(singletonList(locker), singletonList(smartLockerRobot));
 
         Bag bag = new Bag();
         lockerRobotManager.saveBag(bag);
@@ -119,9 +120,9 @@ class LockerRobotManagerTest {
 
     @Test
     void should_throw_NoCapacityException_when_LockerRobotManager_save_bag_given_manage_1_filled_robot_and_1_filled_locker() {
-        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(asList(new Locker(1)));
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
         Locker locker = new Locker(1);
-        LockerRobotManager lockerRobotManager = new LockerRobotManager(asList(locker), asList(smartLockerRobot));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(singletonList(locker), singletonList(smartLockerRobot));
 
         lockerRobotManager.saveBag(new Bag());
         lockerRobotManager.saveBag(new Bag());
@@ -159,8 +160,8 @@ class LockerRobotManagerTest {
 
     @Test
     void should_return_bag_when_LockerRobotManager_take_bag_given_manage_2_robot_and_not_manage_locker_and_valid_ticket() {
-        SmartLockerRobot firstSmartLockerRobot = new SmartLockerRobot(asList(new Locker(1)));
-        SmartLockerRobot secondSmartLockerRobot = new SmartLockerRobot(asList(new Locker(1)));
+        SmartLockerRobot firstSmartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
+        SmartLockerRobot secondSmartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
         LockerRobotManager lockerRobotManager = new LockerRobotManager(emptyList(), asList(firstSmartLockerRobot, secondSmartLockerRobot));
 
         Bag firstBag = new Bag();
@@ -174,8 +175,8 @@ class LockerRobotManagerTest {
 
     @Test
     void should_throw_NoCapacityException_when_LockerRobotManager_take_bag_given_manage_2_robot_and_not_manage_locker_and_invalid_ticket() {
-        SmartLockerRobot firstSmartLockerRobot = new SmartLockerRobot(asList(new Locker(1)));
-        SmartLockerRobot secondSmartLockerRobot = new SmartLockerRobot(asList(new Locker(1)));
+        SmartLockerRobot firstSmartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
+        SmartLockerRobot secondSmartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
         LockerRobotManager lockerRobotManager = new LockerRobotManager(emptyList(), asList(firstSmartLockerRobot, secondSmartLockerRobot));
 
         Bag bag = new Bag();
@@ -187,9 +188,9 @@ class LockerRobotManagerTest {
 
     @Test
     void should_return_bag_when_LockerRobotManager_take_bag_given_manage_1_robot_and_1_locker_and_valid_ticket() {
-        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(asList(new Locker(1)));
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
         Locker locker = new Locker(1);
-        LockerRobotManager lockerRobotManager = new LockerRobotManager(asList(locker), asList(smartLockerRobot));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(singletonList(locker), singletonList(smartLockerRobot));
 
         Bag firstBag = new Bag();
         Ticket firstTicket = lockerRobotManager.saveBag(firstBag);
@@ -202,9 +203,9 @@ class LockerRobotManagerTest {
 
     @Test
     void should_throw_InvalidTicketException_when_LockerRobotManager_take_bag_given_manage_1_locker_and_1_robot_and_invalid_ticket() {
-        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(asList(new Locker(1)));
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
         Locker locker = new Locker(1);
-        LockerRobotManager lockerRobotManager = new LockerRobotManager(asList(locker), asList(smartLockerRobot));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(singletonList(locker), singletonList(smartLockerRobot));
 
         Bag bag = new Bag();
         lockerRobotManager.saveBag(bag);
