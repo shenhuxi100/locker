@@ -13,7 +13,6 @@ import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
 
 /*
- * Given director管理一个manager，manager不管理robot，只管理locker
  * Given director管理一个manager，manager既管理locker，也管理robot
  * Given director管理两个manager，manager1管理两个robot，不管理locker；manager2不管理robot，只管理locker
  */
@@ -77,8 +76,8 @@ class LockerRobotDirectorTest {
 
     @Test
     void should_return_report_with_ML_when_LockerRobotDirector_view_report_given_1_manager_which_only_manage_1_locker() {
-        Locker firstLocker = new Locker(2);
-        LockerRobotManager lockerRobotManager1 = new LockerRobotManager(singletonList(firstLocker), emptyList());
+        Locker locker = new Locker(2);
+        LockerRobotManager lockerRobotManager1 = new LockerRobotManager(singletonList(locker), emptyList());
         LockerRobotDirector lockerRobotDirector = new LockerRobotDirector(singletonList(lockerRobotManager1));
 
         Bag bag = new Bag();
@@ -88,6 +87,31 @@ class LockerRobotDirectorTest {
 
         String expectReport = "M 1 2\n" +
                 "\tL 1 2\n";
+        assertEquals(expectReport, report);
+    }
+
+    @Test
+    void should_return_report_with_MLRLRL_when_LockerRobotDirector_view_report_given_1_manager_which_manage_2_robots_each_with_1_locker() {
+        Locker locker = new Locker(2);
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(singletonList(new Locker(2)));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(singletonList(locker), asList(smartLockerRobot, primaryLockerRobot));
+        LockerRobotDirector lockerRobotDirector = new LockerRobotDirector(singletonList(lockerRobotManager));
+
+        Bag bag = new Bag();
+        lockerRobotManager.saveBag(bag);
+        bag = new Bag();
+        lockerRobotManager.saveBag(bag);
+
+
+        String report = lockerRobotDirector.viewReport();
+
+        String expectReport = "M 3 5\n" +
+                "\tL 2 2\n" +
+                "\tR 0 1\n" +
+                "\t\tL 0 1\n" +
+                "\tR 1 2\n" +
+                "\t\tL 1 2\n";
         assertEquals(expectReport, report);
     }
 }

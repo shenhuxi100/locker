@@ -113,12 +113,12 @@ Then 报表内容为
 M  1 2
 	L 1 2
 
-Given LockerRobotDirector管理一个LockerRobotManager， LockerRobotManager先管理一个smartLockerRobot，再管理一个primaryLockerRobot，并管理剩余容量为1，总容量为2的一个locker，
+Given LockerRobotDirector管理一个LockerRobotManager， LockerRobotManager先管理一个smartLockerRobot，再管理一个primaryLockerRobot，并管理剩余容量为2，总容量为2的一个locker，
 primaryLockerRobot管理一个剩余容量为1，总容量为2的locker，smartLockerRobot管理一个剩余容量为0，总容量为1的locker，
 When LockerRobotDirector查看报表
 Then 报表内容为
-M  2 5
-    L 1 2
+M  3 5
+    L 2 2
     R 0 1
         L 0 1
 	R 1 2
