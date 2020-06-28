@@ -13,7 +13,6 @@ import static java.util.Collections.singletonList;
 import static org.junit.Assert.assertEquals;
 
 /*
- * Given director管理一个manager，manager不管理robot，manager管理一个locker，同时存在一个被其他director管理的manager
  * Given director管理一个manager，manager不管理robot，只管理locker
  * Given director管理一个manager，manager既管理locker，也管理robot
  * Given director管理两个manager，manager1管理两个robot，不管理locker；manager2不管理robot，只管理locker
@@ -64,6 +63,22 @@ class LockerRobotDirectorTest {
         LockerRobotManager lockerRobotManager1 = new LockerRobotManager(singletonList(firstLocker), emptyList());
         Locker secondLocker = new Locker(2);
         LockerRobotManager lockerRobotManager2 = new LockerRobotManager(singletonList(secondLocker), emptyList());
+        LockerRobotDirector lockerRobotDirector = new LockerRobotDirector(singletonList(lockerRobotManager1));
+
+        Bag bag = new Bag();
+        lockerRobotManager1.saveBag(bag);
+
+        String report = lockerRobotDirector.viewReport();
+
+        String expectReport = "M 1 2\n" +
+                "\tL 1 2\n";
+        assertEquals(expectReport, report);
+    }
+
+    @Test
+    void should_return_report_with_ML_when_LockerRobotDirector_view_report_given_1_manager_which_only_manage_1_locker() {
+        Locker firstLocker = new Locker(2);
+        LockerRobotManager lockerRobotManager1 = new LockerRobotManager(singletonList(firstLocker), emptyList());
         LockerRobotDirector lockerRobotDirector = new LockerRobotDirector(singletonList(lockerRobotManager1));
 
         Bag bag = new Bag();
