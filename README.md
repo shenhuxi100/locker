@@ -78,3 +78,63 @@ Given LockerRobotManager管理2个robot & 未管理储物柜 & 无效票据，Wh
 Given LockerRobotManager管理1个robot & 1个储物柜 & 有效票据，When 让LockerRobotManager取包，Then 返回一个包
 
 Given LockerRobotManager管理1个robot & 1个储物柜 & 无效票据，When 让LockerRobotManager取包，Then 取包失败，提示无效票
+
+## Locker Robot Director
+### Tasking:
+Given LockerRobotDirector管理一个LockerRobotManager， LockerRobotManager管理一个primaryLockerRobot，自身不管理locker，
+primaryLockerRobot管理一个剩余容量为1，总容量为2的locker
+When LockerRobotDirector查看报表
+Then 报表内容为
+M 1 2
+	R 1 2
+		L 1 2
+
+Given LockerRobotDirector管理一个LockerRobotManager，LockerRobotManager先管理一个smartLockerRobot，再管理一个primaryLockerRobot，自身不管理locker，
+primaryLockerRobot管理一个剩余容量为1，总容量为2的locker，smartLockerRobot管理一个剩余容量为0，总容量为1的locker，
+When LockerRobotDirector查看报表
+Then 报表内容为
+M  1 3
+    R 0 1
+	    L 0 1
+	R 1 2
+		L 1 2
+
+Given LockerRobotDirector管理一个LockerRobotManager，LockerRobotManager管理一个剩余容量为1，总容量为2的locker，
+同时存在一个被其他LockerRobotDirector管理的LockerRobotManager2，LockerRobotManager2管理一个剩余容量为0，总容量为5的locker，
+When LockerRobotDirector查看报表
+Then 报表内容为
+M  1 2
+	L 1 2
+
+Given LockerRobotDirector管理一个LockerRobotManager， LockerRobotManager管理一个locker，自身不管理LockerRobot，
+locker的剩余容量为1，总容量为2
+When LockerRobotDirector查看报表
+Then 报表内容为
+M  1 2
+	L 1 2
+
+Given LockerRobotDirector管理一个LockerRobotManager， LockerRobotManager先管理一个smartLockerRobot，再管理一个primaryLockerRobot，并管理剩余容量为1，总容量为2的一个locker，
+primaryLockerRobot管理一个剩余容量为1，总容量为2的locker，smartLockerRobot管理一个剩余容量为0，总容量为1的locker，
+When LockerRobotDirector查看报表
+Then 报表内容为
+M  2 5
+    L 1 2
+    R 0 1
+        L 0 1
+	R 1 2
+		L 1 2
+
+Given LockerRobotDirector管理两个LockerRobotManager，
+LockerRobotManager1先管理一个smartLockerRobot，再管理一个primaryLockerRobot，自身不管理locker，
+primaryLockerRobot管理一个剩余容量为1，总容量为2的locker，smartLockerRobot管理一个剩余容量为0，总容量为1的locker，
+LockerRobotManager2管理一个Locker，自身不管理LockerRobot，Locker的剩余容量为1，总容量为2
+When LockerRobotDirector查看报表
+Then 报表内容为
+M  1 3
+    R 0 1
+	    L 0 1
+	R 1 2
+		L 1 2
+M  1 2
+    L 1 2
+
