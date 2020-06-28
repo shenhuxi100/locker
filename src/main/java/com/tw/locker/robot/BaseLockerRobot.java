@@ -40,7 +40,7 @@ public abstract class BaseLockerRobot {
         String report = "\tR " + getRemainingCapacity() + " " + getTotalCapacity() + "\n";
         return lockers.stream()
                 .map(Locker::getReport)
-                .reduce(report, (partialReport, lockerReport) -> partialReport + lockerReport);
+                .reduce(report, (partialReport, lockerReport) -> partialReport+ "\t" + lockerReport);
     }
 
     public abstract Ticket saveBag(Bag bag);
