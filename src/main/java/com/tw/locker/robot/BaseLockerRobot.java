@@ -37,7 +37,7 @@ public abstract class BaseLockerRobot {
     }
 
     public String getReport() {
-        String report = "R " + getRemainingCapacity() + " " + getTotalCapacity() + "\n\t";
+        String report = "\tR " + getRemainingCapacity() + " " + getTotalCapacity() + "\n";
         return lockers.stream()
                 .map(Locker::getReport)
                 .reduce(report, (partialReport, lockerReport) -> partialReport + lockerReport);

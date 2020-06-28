@@ -62,7 +62,7 @@ public class LockerRobotManager {
     }
 
     public String getReport() {
-        String report = "M " + getRemainingCapacity() + " " + getTotalCapacity() + "\n\t";
+        String report = "M " + getRemainingCapacity() + " " + getTotalCapacity() + "\n";
 
         return robots.isEmpty() ? report : robots.stream()
                 .map(BaseLockerRobot::getReport)

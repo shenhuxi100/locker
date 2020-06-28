@@ -48,6 +48,6 @@ public class Locker {
     }
 
     public String getReport() {
-        return "\tL " + getRemainingCapacity() + " " + capacity + "\n";
+        return "\t\tL " + getRemainingCapacity() + " " + capacity + "\n";
     }
 }
