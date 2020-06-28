@@ -28,8 +28,19 @@ public abstract class BaseLockerRobot {
         return lockers.stream().mapToInt(Locker::getRemainingCapacity).sum();
     }
 
+    public int getTotalCapacity() {
+        return lockers.stream().mapToInt(Locker::getCapacity).sum();
+    }
+
     public boolean isValidTicket(Ticket ticket) {
         return lockers.stream().anyMatch(locker -> locker.isValidTicket(ticket));
+    }
+
+    public String getReport() {
+        String report = "R " + getRemainingCapacity() + " " + getTotalCapacity() + "\n\t";
+        return lockers.stream()
+                .map(Locker::getReport)
+                .reduce(report, (partialReport, lockerReport) -> partialReport + lockerReport);
     }
 
     public abstract Ticket saveBag(Bag bag);

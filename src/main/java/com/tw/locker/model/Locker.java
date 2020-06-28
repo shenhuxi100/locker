@@ -39,7 +39,15 @@ public class Locker {
         return capacity - lockerMap.size();
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
     public boolean isValidTicket(Ticket ticket) {
         return lockerMap.get(ticket) != null;
+    }
+
+    public String getReport() {
+        return "\tL " + getRemainingCapacity() + " " + capacity + "\n";
     }
 }

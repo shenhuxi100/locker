@@ -48,4 +48,26 @@ public class LockerRobotManager {
 
         throw new InvalidTicketException();
     }
+
+    public int getRemainingCapacity() {
+        int lockersRemainingCapacity = lockers.stream().mapToInt(Locker::getRemainingCapacity).sum();
+        int robotsRemainingCapacity = robots.stream().mapToInt(BaseLockerRobot::getRemainingCapacity).sum();
+        return lockersRemainingCapacity + robotsRemainingCapacity;
+    }
+
+    public int getTotalCapacity() {
+        int lockersTotalCapacity = lockers.stream().mapToInt(Locker::getCapacity).sum();
+        int robotsTotalCapacity = robots.stream().mapToInt(BaseLockerRobot::getTotalCapacity).sum();
+        return lockersTotalCapacity + robotsTotalCapacity;
+    }
+
+    public String getReport() {
+        String report = "M " + getRemainingCapacity() + " " + getTotalCapacity() + "\n\t";
+
+        return robots.isEmpty() ? report : robots.stream()
+                .map(BaseLockerRobot::getReport)
+                .reduce(report, (partialReport, robotReport) -> partialReport + robotReport);
+
+
+    }
 }
