@@ -87,7 +87,7 @@ class LockerRobotDirectorTest {
     }
 
     @Test
-    void should_return_report_with_MLRLRL_when_LockerRobotDirector_view_report_given_1_manager_which_manage_2_robots_each_with_1_locker() {
+    void should_return_report_with_MLRLRL_when_LockerRobotDirector_view_report_given_1_manager_which_manage_1_locker_and_2_robots_each_with_1_locker() {
         Locker locker = new Locker(2);
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(singletonList(new Locker(2)));
