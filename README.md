@@ -93,31 +93,31 @@ Given LockerRobotDirector管理一个LockerRobotManager，LockerRobotManager先�
 primaryLockerRobot管理一个剩余容量为1，总容量为2的locker，smartLockerRobot管理一个剩余容量为0，总容量为1的locker，
 When LockerRobotDirector查看报表
 Then 报表内容为
-M  1 3
+M 1 3
     R 0 1
 	    L 0 1
 	R 1 2
 		L 1 2
 
 Given LockerRobotDirector管理一个LockerRobotManager，LockerRobotManager管理一个剩余容量为1，总容量为2的locker，
-同时存在一个被其他LockerRobotDirector管理的LockerRobotManager2，LockerRobotManager2管理一个剩余容量为0，总容量为5的locker，
+同时存在一个被其他LockerRobotManager管理的locker2，locker2的剩余容量为0，总容量为5，
 When LockerRobotDirector查看报表
 Then 报表内容为
-M  1 2
+M 1 2
 	L 1 2
 
 Given LockerRobotDirector管理一个LockerRobotManager， LockerRobotManager管理一个locker，自身不管理LockerRobot，
 locker的剩余容量为1，总容量为2
 When LockerRobotDirector查看报表
 Then 报表内容为
-M  1 2
+M 1 2
 	L 1 2
 
 Given LockerRobotDirector管理一个LockerRobotManager， LockerRobotManager先管理一个smartLockerRobot，再管理一个primaryLockerRobot，并管理剩余容量为2，总容量为2的一个locker，
 primaryLockerRobot管理一个剩余容量为1，总容量为2的locker，smartLockerRobot管理一个剩余容量为0，总容量为1的locker，
 When LockerRobotDirector查看报表
 Then 报表内容为
-M  3 5
+M 3 5
     L 2 2
     R 0 1
         L 0 1
@@ -130,11 +130,11 @@ primaryLockerRobot管理一个剩余容量为1，总容量为2的locker，smartL
 LockerRobotManager2管理一个Locker，自身不管理LockerRobot，Locker的剩余容量为1，总容量为2
 When LockerRobotDirector查看报表
 Then 报表内容为
-M  1 3
+M 1 3
     R 0 1
 	    L 0 1
 	R 1 2
 		L 1 2
-M  1 2
+M 1 2
     L 1 2
 
