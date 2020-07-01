@@ -56,7 +56,6 @@ class LockerRobotDirectorTest {
     void should_return_report_with_ML_when_LockerRobotDirector_view_report_given_1_manager_which_only_manage_1st_locker_and_2nd_locker_which_is_not_manage_by_this_manager() {
         Locker firstLocker = new Locker(2);
         LockerRobotManager lockerRobotManager = new LockerRobotManager(singletonList(firstLocker), emptyList());
-        Locker secondLocker = new Locker(5);
         LockerRobotDirector lockerRobotDirector = new LockerRobotDirector(singletonList(lockerRobotManager));
 
         Bag bag = new Bag();

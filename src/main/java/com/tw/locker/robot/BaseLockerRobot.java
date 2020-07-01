@@ -5,6 +5,7 @@ import com.tw.locker.model.Bag;
 import com.tw.locker.model.Locker;
 import com.tw.locker.model.Ticket;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 public abstract class BaseLockerRobot {
@@ -37,7 +38,7 @@ public abstract class BaseLockerRobot {
     }
 
     public String getReport() {
-        String report = "\tR " + getRemainingCapacity() + " " + getTotalCapacity() + "\n";
+        String report = MessageFormat.format("\tR {0} {1}\n", getRemainingCapacity(), getTotalCapacity());
         return lockers.stream()
                 .map(Locker::getReport)
                 .reduce(report, (partialReport, lockerReport) -> partialReport+ "\t" + lockerReport);

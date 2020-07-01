@@ -7,6 +7,7 @@ import com.tw.locker.model.Locker;
 import com.tw.locker.model.Ticket;
 import com.tw.locker.robot.BaseLockerRobot;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 public class LockerRobotManager {
@@ -62,7 +63,7 @@ public class LockerRobotManager {
     }
 
     public String getReport() {
-        String report = "M " + getRemainingCapacity() + " " + getTotalCapacity() + "\n";
+        String report = MessageFormat.format("M {0} {1}\n", getRemainingCapacity(), getTotalCapacity());
 
         report = lockers.isEmpty() ? report : lockers.stream()
                 .map(Locker::getReport)
@@ -71,7 +72,5 @@ public class LockerRobotManager {
         return robots.isEmpty() ? report : robots.stream()
                 .map(BaseLockerRobot::getReport)
                 .reduce(report, (partialReport, robotReport) -> partialReport + robotReport);
-
-
     }
 }

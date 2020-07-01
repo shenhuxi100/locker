@@ -3,6 +3,7 @@ package com.tw.locker.model;
 import com.tw.locker.exception.InvalidTicketException;
 import com.tw.locker.exception.NoCapacityException;
 
+import java.text.MessageFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,6 +49,6 @@ public class Locker {
     }
 
     public String getReport() {
-        return "\tL " + getRemainingCapacity() + " " + capacity + "\n";
+        return MessageFormat.format("\tL {0} {1}\n", getRemainingCapacity(), capacity);
     }
 }
