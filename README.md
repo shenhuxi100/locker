@@ -99,8 +99,8 @@ M 1 3
 	R 1 2
 		L 1 2
 
-Given LockerRobotDirector管理一个LockerRobotManager，LockerRobotManager管理一个剩余容量为1，总容量为2的locker，
-同时存在一个被其他LockerRobotManager管理的locker2，locker2的剩余容量为4，总容量为5，
+Given LockerRobotDirector只管理一个LockerRobotManager，LockerRobotManager管理一个剩余容量为1，总容量为2的locker，
+同时存在一个不被此LockerRobotManager管理的locker2，locker2的剩余容量为4，总容量为5，
 When LockerRobotDirector查看报表
 Then 报表内容为
 M 1 2
