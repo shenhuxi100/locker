@@ -113,6 +113,32 @@ class LockerRobotDirectorTest {
     }
 
     @Test
+    void should_return_report_with_MLRLRLL_when_LockerRobotDirector_view_report_given_1_manager_which_manage_1_locker_and_2_robots_1st_robot_with_1_locker_2nd_robot_with_2_lockers() {
+        Locker locker = new Locker(2);
+        SmartLockerRobot smartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
+        PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(asList(new Locker(1), new Locker(1)));
+        LockerRobotManager lockerRobotManager = new LockerRobotManager(singletonList(locker), asList(smartLockerRobot, primaryLockerRobot));
+        LockerRobotDirector lockerRobotDirector = new LockerRobotDirector(singletonList(lockerRobotManager));
+
+        Bag bag = new Bag();
+        lockerRobotManager.saveBag(bag);
+        bag = new Bag();
+        lockerRobotManager.saveBag(bag);
+
+
+        String report = lockerRobotDirector.viewReport();
+
+        String expectReport = "M 3 5\n" +
+                "\tL 2 2\n" +
+                "\tR 0 1\n" +
+                "\t\tL 0 1\n" +
+                "\tR 1 2\n" +
+                "\t\tL 0 1\n" +
+                "\t\tL 1 1\n";
+        assertEquals(expectReport, report);
+    }
+
+    @Test
     void should_return_report_with_MRLRLML_when_LockerRobotDirector_view_report_given_1st_manager_which_manage_2_robots_each_with_1_locker_2nd_manager_only_manage_1_locker() {
         SmartLockerRobot smartLockerRobot = new SmartLockerRobot(singletonList(new Locker(1)));
         PrimaryLockerRobot primaryLockerRobot = new PrimaryLockerRobot(singletonList(new Locker(2)));
